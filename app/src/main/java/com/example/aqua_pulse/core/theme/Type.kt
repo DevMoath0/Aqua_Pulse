@@ -1,4 +1,4 @@
-package com.example.aqua_pulse.ui.theme
+package com.example.aqua_pulse.core.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

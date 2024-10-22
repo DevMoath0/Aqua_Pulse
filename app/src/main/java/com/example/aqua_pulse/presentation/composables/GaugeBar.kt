@@ -1,4 +1,4 @@
-package presentation.components
+package com.example.aqua_pulse.presentation.composables
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
@@ -36,7 +37,7 @@ fun GaugeBarComponent(
     maxIndicatorValue: Int = 100,
     backgroundIndicatorColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
     backgroundIndicatorStrokeWidth: Float = 100f,
-    foregroundIndicatorColor: Color = MaterialTheme.colorScheme.primary,
+    foregroundIndicatorColor: Brush,
     foregroundIndicatorStrokeWidth: Float = 100f,
 //    indicatorStrokeCap: StrokeCap = StrokeCap.Round,
     bigTextFontSize: TextUnit = MaterialTheme.typography.headlineLarge.fontSize,
@@ -64,7 +65,7 @@ fun GaugeBarComponent(
         (animatedIndicatorValue / maxIndicatorValue) * 100
 
     val sweepAngle by animateFloatAsState(
-        targetValue = (2.4 * percentage).toFloat(),
+        targetValue = (-2.4 * percentage).toFloat(),
         animationSpec = tween(1000)
     )
 
@@ -109,6 +110,7 @@ fun GaugeBarComponent(
     }
 }
 
+//GreyBackground Gauge
 fun DrawScope.backgroundIndicator(
     componentSize: Size,
     indicatorColor: Color,
@@ -118,8 +120,8 @@ fun DrawScope.backgroundIndicator(
     drawArc(
         size = componentSize,
         color = indicatorColor,
-        startAngle = 150f,
-        sweepAngle = 240f,
+        startAngle = 30f,
+        sweepAngle = -240f,
         useCenter = false,
         style = Stroke(
             width = indicatorStrokeWidth,
@@ -135,14 +137,14 @@ fun DrawScope.backgroundIndicator(
 fun DrawScope.foregroundIndicator(
     sweepAngle: Float,
     componentSize: Size,
-    indicatorColor: Color,
+    indicatorColor: Brush,
     indicatorStrokeWidth: Float,
 //    indicatorStokeCap: StrokeCap
 ) {
     drawArc(
         size = componentSize,
-        color = indicatorColor,
-        startAngle = 150f,
+        brush = indicatorColor,
+        startAngle = 30f,
         sweepAngle = sweepAngle,
         useCenter = false,
         style = Stroke(
@@ -184,5 +186,5 @@ fun EmbeddedElements(
 @Composable
 @Preview(showBackground = true)
 fun CustomComponentPreview() {
-    GaugeBarComponent()
+    //GaugeBarComponent()
 }

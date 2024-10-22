@@ -4,46 +4,33 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.aqua_pulse.ui.theme.Aqua_PulseTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.aqua_pulse.presentation.screen.HomeScreen
+import com.example.aqua_pulse.presentation.screen.Screen
+import com.example.aqua_pulse.core.theme.Aqua_PulseTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
+        setContent{
             Aqua_PulseTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    WaterDropView(
-                        modifier = Modifier.padding(innerPadding).fillMaxSize().windowInsetsPadding(WindowInsets.statusBars)
-                    )
-                }
+                NavGraph()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun NavGraph(){
+    val navController = rememberNavController()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Aqua_PulseTheme {
-        Greeting("Android")
+    NavHost(navController = navController, startDestination = Screen.HomeView.route){
+        composable(route = Screen.HomeView.route){
+            HomeScreen(navController)
+        }
     }
 }
