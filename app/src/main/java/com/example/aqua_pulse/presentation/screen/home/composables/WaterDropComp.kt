@@ -1,4 +1,4 @@
-package com.example.aqua_pulse.presentation.composables
+package com.example.aqua_pulse.presentation.screen.home.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

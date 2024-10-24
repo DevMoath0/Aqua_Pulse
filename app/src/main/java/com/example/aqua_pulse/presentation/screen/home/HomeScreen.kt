@@ -1,4 +1,4 @@
-package com.example.aqua_pulse.presentation.screen
+package com.example.aqua_pulse.presentation.screen.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,11 +10,13 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.aqua_pulse.core.theme.background
-import com.example.aqua_pulse.presentation.composables.BlobsComp
-import com.example.aqua_pulse.presentation.composables.WaterDropComp
+import com.example.aqua_pulse.presentation.screen.home.composables.BlobsComp
+import com.example.aqua_pulse.presentation.screen.home.composables.WaterDropComp
+import com.example.aqua_pulse.presentation.screen.home.composables.WaterStatisticsScreen
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, viewModel: WaterStatisticsViewModel) {
+
     Box(
         modifier = Modifier.fillMaxSize().background(background),
     ) {
@@ -35,6 +37,14 @@ fun HomeScreen(navController: NavController) {
             contentAlignment = Alignment.TopCenter
         ) {
             WaterDropComp()
+        }
+
+        // WaterDropView centered in the screen
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            WaterStatisticsScreen(viewModel)
         }
 
     }
