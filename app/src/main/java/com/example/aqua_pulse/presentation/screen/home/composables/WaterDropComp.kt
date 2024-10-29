@@ -21,9 +21,11 @@ import com.example.aqua_pulse.core.theme.gaugeBarGradientBrush
 import com.example.aqua_pulse.core.theme.gauge_background
 
 @Composable
-fun WaterDropComp(){
-
-    var value by remember { mutableIntStateOf(0) }
+fun WaterDropComp(
+    modifier: Modifier,
+    indicatorValue: Int,
+    maxIndicatorValue: Int,
+){
 
     val verticalOffset: Dp = (100).dp
 
@@ -34,22 +36,16 @@ fun WaterDropComp(){
         Image(
             painter = painterResource(id = R.drawable.water_drop),
             contentDescription = "Water Drop",
-            modifier = Modifier
+            modifier = modifier
                 .size(300.dp)
                 .offset(y = verticalOffset + 50.dp)
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null  // This removes the ripple effect
-                ) {
-                    value++
-                }
         )
         Box(
             modifier = Modifier.offset(y = 160.dp)
         ){
             GaugeBarComponent(
-                indicatorValue = value,
-                maxIndicatorValue = 5,
+                indicatorValue = indicatorValue,
+                maxIndicatorValue = maxIndicatorValue,
                 foregroundIndicatorColor = gaugeBarGradientBrush,
                 backgroundIndicatorColor = gauge_background,
             )

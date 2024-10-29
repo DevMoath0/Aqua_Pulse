@@ -23,8 +23,9 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context,
             WaterIntakeDatabase::class.java,
-            "water_intake.db"
+            "water_intake"
         ).build()
+
     }
 
     @Provides

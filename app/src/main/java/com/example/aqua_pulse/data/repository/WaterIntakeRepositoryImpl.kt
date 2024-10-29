@@ -52,6 +52,9 @@ class WaterIntakeRepositoryImpl @Inject constructor(
 
         //Todo: there might be an error here, so change it if occurs to Map<Long, Int>
         return waterIntakeDao.getWaterIntakeForDateRange(startDate, endDate)
+            .map { (date, amount) ->
+                DailyWaterIntake(date = date, totalAmount = amount)
+            }
     }
 
 }

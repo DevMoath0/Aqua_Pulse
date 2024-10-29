@@ -17,12 +17,14 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.aqua_pulse.domain.model.DailyWaterIntake
-import com.example.aqua_pulse.presentation.screen.home.WaterStatisticsViewModel
+import com.example.aqua_pulse.presentation.screen.home.HomeViewModel
+
+// ############# NOT USABLE SCREEN ###############
 
 // Statistics Screen
 @Composable
-fun WaterStatisticsScreen(viewModel: WaterStatisticsViewModel) {
-    val weeklyData by viewModel.weeklyData.collectAsState()
+fun WaterStatisticsScreen(viewModel: HomeViewModel) {
+    val weeklyData by viewModel.dailyData.collectAsState()
 
     Column(
         modifier = Modifier
