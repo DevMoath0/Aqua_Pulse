@@ -1,4 +1,4 @@
-package com.example.aqua_pulse.presentation.composables
+package com.example.aqua_pulse.presentation.screen.home.composables
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
