@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,12 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+ import androidx.compose.ui.unit.dp
 import com.example.aqua_pulse.core.theme.background
 import com.example.aqua_pulse.presentation.screen.home.composables.BlobsComp
 import com.example.aqua_pulse.presentation.screen.home.composables.WaterDropComp
-import com.example.aqua_pulse.presentation.screen.home.composables.WaterStatisticsScreen
 import java.util.Calendar
 
 @Composable
@@ -43,6 +40,8 @@ fun HomeScreen(
     }.timeInMillis
 
     val todayWaterAmount = dailyData.find { it.date == today }?.totalAmount ?: 0
+
+    ///Daily Goal in ml
     val dailyGoal = 2000 // Default goal in ml
 
     Box(
@@ -70,7 +69,9 @@ fun HomeScreen(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null  // This removes the ripple effect
                 ){
-                    viewModel.addWaterIntake(250)
+                    if(todayWaterAmount in 0..< dailyGoal){
+                        viewModel.addWaterIntake(250)
+                    }
                 }
             )
         }
@@ -95,6 +96,5 @@ fun HomeScreen(
                 )
             }
         }
-
     }
 }
