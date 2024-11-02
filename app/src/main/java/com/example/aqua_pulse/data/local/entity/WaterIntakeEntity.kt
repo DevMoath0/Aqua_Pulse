@@ -12,13 +12,13 @@ data class WaterIntakeEntity(
     val id: Int = 0,
 
     @ColumnInfo(name = "date")
-    val date: Long,  // Store as timestamp
+    val date: String,  // Format: "yyyy-MM-dd"
 
     @ColumnInfo(name = "amount")
     val amount: Int, // Amount in ml
 
     @ColumnInfo(name = "time_stamp")
-    val timestamp: Long = System.currentTimeMillis()
+    val timestamp: String, // Format: "yyyy-MM-dd HH:mm:ss.SSSSSS"
 ){
     fun toDomainModel() = WaterIntake(
         id = id,
