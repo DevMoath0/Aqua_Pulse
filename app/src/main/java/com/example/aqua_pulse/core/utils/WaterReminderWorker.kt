@@ -21,8 +21,8 @@ class WaterReminderWorker(
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
-        // Retrieve input data
         val enabled = inputData.getBoolean("enabled", false)
+        val isSettingsUpdate = inputData.getBoolean("isSettingsUpdate", false)
         val startTimeStr = inputData.getString("startTime")
         val endTimeStr = inputData.getString("endTime")
         val intervalMinutes = inputData.getInt("intervalMinutes", 120)
@@ -32,24 +32,24 @@ class WaterReminderWorker(
             return Result.success()
         }
 
-        // Parse time range
+        if (isSettingsUpdate) {
+            logDebug("Settings update detected. No notification triggered.")
+            scheduleNextReminder(intervalMinutes) // Reschedule with the updated settings
+            return Result.success()
+        }
+
         val startTime = startTimeStr?.let { LocalTime.parse(it) } ?: LocalTime.of(8, 0)
         val endTime = endTimeStr?.let { LocalTime.parse(it) } ?: LocalTime.of(22, 0)
         val currentTime = LocalTime.now()
 
-        // Check if within time range
         if (currentTime.isBefore(startTime) || currentTime.isAfter(endTime)) {
             logDebug("Current time ($currentTime) is outside the time range ($startTime to $endTime).")
             return Result.success()
         }
 
-        // Send notification
         logDebug("Within time range. Sending notification.")
         showWaterReminderNotification()
-
-        // Schedule the next notification
         scheduleNextReminder(intervalMinutes)
-
         return Result.success()
     }
 

@@ -18,14 +18,13 @@ class ReminderRepositoryImpl @Inject constructor(
     override suspend fun scheduleReminders(preferences: ReminderPreferences) {
         val workManager = WorkManager.getInstance(context)
 
-        // Cancel any existing work
+        // Cancel existing work
         workManager.cancelUniqueWork(WaterReminderWorker.WORK_NAME)
 
-        // Explicitly log the enabled state
-        Log.wtf("moathme", "Scheduling reminders - Enabled: ${preferences.enabled}")
-
-        // If reminders are not enabled, stop here
-        if (!preferences.enabled) return
+        if (!preferences.enabled) {
+            Log.wtf("moathme","Reminders disabled. No work scheduled.")
+            return
+        }
 
         // Prepare input data
         val inputData = Data.Builder()
@@ -33,11 +32,11 @@ class ReminderRepositoryImpl @Inject constructor(
             .putString("startTime", preferences.startTime.toString())
             .putString("endTime", preferences.endTime.toString())
             .putInt("intervalMinutes", preferences.intervalMinutes)
-            .putBoolean("isSettingsUpdate", true)
+            .putBoolean("isSettingsUpdate", true) // Mark as a settings update
             .build()
 
-        // Create a one-time work request
-        val reminderRequest = OneTimeWorkRequestBuilder<WaterReminderWorker>()
+        // Schedule the next work
+        val workRequest = OneTimeWorkRequestBuilder<WaterReminderWorker>()
             .setInputData(inputData)
             .setConstraints(
                 Constraints.Builder()
@@ -46,12 +45,13 @@ class ReminderRepositoryImpl @Inject constructor(
             )
             .build()
 
-        // Enqueue the initial work
         workManager.enqueueUniqueWork(
             WaterReminderWorker.WORK_NAME,
             ExistingWorkPolicy.REPLACE,
-            reminderRequest
+            workRequest
         )
+
+        Log.wtf("moathme","Scheduled reminders with preferences: $preferences")
     }
 
     override suspend fun triggerReminderNotification() {
