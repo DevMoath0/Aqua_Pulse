@@ -1,4 +1,4 @@
-package com.example.aqua_pulse.presentation.screen.settings.composables
+package com.example.aqua_pulse.presentation.screen.notifications.composables
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.AlertDialog

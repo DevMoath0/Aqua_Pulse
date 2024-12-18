@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,13 +25,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.aqua_pulse.R
 import com.example.aqua_pulse.core.theme.background
 import com.example.aqua_pulse.core.utils.DateUtils
+import com.example.aqua_pulse.presentation.screen.Screen
 import com.example.aqua_pulse.presentation.screen.home.composables.BlobsComp
+import com.example.aqua_pulse.presentation.screen.home.composables.WaterDropComp
 
 @Composable
 fun HomeScreen(
+    navController: NavController,
     viewModel: HomeViewModel
 ) {
 
@@ -55,6 +60,24 @@ fun HomeScreen(
                     .blur(radius = 50.dp)  // Increased blur for better blending
             ) {
                 BlobsComp()
+            }
+            // WaterDropView centered in the screen
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.TopCenter
+            ) {
+                WaterDropComp(
+                    indicatorValue = todayWaterAmount,
+                    maxIndicatorValue = dailyGoal,
+                    modifier = Modifier.clickable (
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null  // This removes the ripple effect
+                    ){
+                        if(todayWaterAmount in 0..< dailyGoal){
+                            viewModel.addWaterIntake(250)
+                        }
+                    }
+                )
             }
             Image(
                 painter = painterResource(id = R.drawable.water_drop),
@@ -89,6 +112,17 @@ fun HomeScreen(
                 style = MaterialTheme.typography.titleMedium,
                 color = Color.White
             )
+
+            Button(
+                onClick = {
+                        navController.navigate(Screen.ReminderPreferencesScreen.route) {
+                            popUpTo(Screen.HomeScreen.route) { inclusive = true }
+                        }
+                }
+            ) {
+                Text("Reminder")
+            }
+
         }
     }
 

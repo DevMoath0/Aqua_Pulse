@@ -1,17 +1,18 @@
-package com.example.aqua_pulse.presentation.screen.settings
+package com.example.aqua_pulse.presentation.screen.notifications
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.aqua_pulse.presentation.screen.settings.composables.TimePickerDialog
+import com.example.aqua_pulse.presentation.screen.notifications.composables.TimePickerDialog
 import java.time.format.DateTimeFormatter
 
 @Composable
@@ -78,8 +79,8 @@ fun ReminderPreferencesScreen(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(
                     onClick = {
-                        if (reminderPreferences.intervalMinutes > 30) {
-                            viewModel.updateInterval(reminderPreferences.intervalMinutes - 30)
+                        if (reminderPreferences.intervalMinutes > 1) {
+                            viewModel.updateInterval(reminderPreferences.intervalMinutes - 1)
                         }
                     }
                 ) {
@@ -89,11 +90,20 @@ fun ReminderPreferencesScreen(
                 IconButton(
                     onClick = {
                         if (reminderPreferences.intervalMinutes < 240) {
-                            viewModel.updateInterval(reminderPreferences.intervalMinutes + 30)
+                            viewModel.updateInterval(reminderPreferences.intervalMinutes + 1)
                         }
                     }
                 ) {
                     Icon(Icons.Default.Add, contentDescription = "Increase interval")
+                }
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(
+                    onClick = {
+                        viewModel.triggerNotifications()
+                    }
+                ) {
+                    Icon(Icons.Default.MailOutline, contentDescription = "Trigger Notification")
                 }
             }
         }

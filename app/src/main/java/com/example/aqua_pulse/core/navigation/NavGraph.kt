@@ -3,20 +3,18 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.aqua_pulse.data.local.preferences.UserPreferencesManager
 import com.example.aqua_pulse.presentation.screen.Screen
 import com.example.aqua_pulse.presentation.screen.home.HomeScreen
 import com.example.aqua_pulse.presentation.screen.home.HomeViewModel
 import com.example.aqua_pulse.presentation.screen.onboarding.OnboardingScreen
 import com.example.aqua_pulse.presentation.screen.onboarding.OnboardingViewModel
-import com.example.aqua_pulse.presentation.screen.settings.ReminderPreferencesScreen
-import com.example.aqua_pulse.presentation.screen.settings.ReminderPreferencesViewModel
+import com.example.aqua_pulse.presentation.screen.notifications.ReminderPreferencesScreen
+import com.example.aqua_pulse.presentation.screen.notifications.ReminderPreferencesViewModel
 import com.example.aqua_pulse.presentation.screen.splash.SplashScreen
+import com.example.aqua_pulse.presentation.screen.splash.SplashViewModel
 
 @Composable
-fun NavGraph(
-    userPreferencesManager: UserPreferencesManager
-) {
+fun NavGraph() {
     val navController = rememberNavController()
 
     NavHost(
@@ -24,18 +22,10 @@ fun NavGraph(
         startDestination = Screen.SplashScreen.route
     ) {
         composable(route = Screen.SplashScreen.route) {
+            val splashViewModel: SplashViewModel = hiltViewModel()
             SplashScreen(
-                userPreferencesManager = userPreferencesManager,
-                onFirstLaunch = {
-                    navController.navigate(Screen.OnboardingScreen.route) {
-                        popUpTo(Screen.SplashScreen.route) { inclusive = true }
-                    }
-                },
-                onNotFirstLaunch = {
-                    navController.navigate(Screen.HomeScreen.route) {
-                        popUpTo(Screen.SplashScreen.route) { inclusive = true }
-                    }
-                }
+                navController = navController,
+                viewModel = splashViewModel
             )
         }
 
@@ -49,7 +39,10 @@ fun NavGraph(
 
         composable(route = Screen.HomeScreen.route) {
             val homeViewModel: HomeViewModel = hiltViewModel()
-            HomeScreen(viewModel = homeViewModel)
+            HomeScreen(
+                navController = navController,
+                viewModel = homeViewModel
+            )
         }
 
         composable(route = Screen.ReminderPreferencesScreen.route) {

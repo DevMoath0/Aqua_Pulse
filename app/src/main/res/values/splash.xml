@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Aqua_Pulse.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/avd_water_drop_animation_delayed</item>
+        <item name="postSplashScreenTheme">@style/Theme.Aqua_Pulse</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+
+        <!-- Todo:
+        BTW there is an issue after the splash screen there is a white screen appearing
+        then the HomeScreen, solve it, this is a temp solution
+        -->
+        <item name="android:windowBackground">@color/background</item>
+
+
+    </style>
+
+</resources>

@@ -1,35 +1,48 @@
 package com.example.aqua_pulse.presentation.screen.splash
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.example.aqua_pulse.data.local.preferences.UserPreferencesManager
-import kotlinx.coroutines.flow.first
+import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.activity.ComponentActivity
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import com.example.aqua_pulse.presentation.screen.Screen
 
 @Composable
 fun SplashScreen(
-    userPreferencesManager: UserPreferencesManager,
-    onFirstLaunch: () -> Unit,
-    onNotFirstLaunch: () -> Unit
+    navController: NavController,
+    viewModel: SplashViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+    val isFirstLaunch by viewModel.isFirstLaunch.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+
     LaunchedEffect(Unit) {
-        val isFirstLaunch = userPreferencesManager.isFirstLaunch.first()
-        if (isFirstLaunch) {
-            onFirstLaunch()
-        } else {
-            onNotFirstLaunch()
+        val activity = context as? ComponentActivity
+        activity?.let {
+            val splashScreen = it.installSplashScreen()
+
+            // Keep splash screen visible while loading
+            splashScreen.setKeepOnScreenCondition { isLoading }
         }
     }
 
-    // Optional UI while checking launch status
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text("AquaPulse Splash", style = MaterialTheme.typography.headlineLarge)
+    // Use LaunchedEffect to handle navigation once isFirstLaunch is determined
+    LaunchedEffect(isFirstLaunch) {
+        isFirstLaunch?.let { firstLaunch ->
+            if (firstLaunch) {
+                navController.navigate(Screen.OnboardingScreen.route) {
+                    popUpTo(Screen.SplashScreen.route) { inclusive = true }
+                }
+            } else {
+                navController.navigate(Screen.HomeScreen.route) {
+                    popUpTo(Screen.SplashScreen.route) { inclusive = true }
+                }
+            }
+        }
     }
 }
