@@ -15,7 +15,7 @@ interface WaterIntakeDao {
     suspend fun insertWaterIntake(waterIntake: WaterIntakeEntity)
 
     @Query("SELECT * FROM water_intake WHERE date = :date")
-    suspend fun getWaterIntakeForDay(date: Long): List<WaterIntakeEntity>
+    suspend fun getWaterIntakeForDay(date: String): List<WaterIntakeEntity>
 
     @Query("""
         SELECT date, SUM(amount) as totalAmount 
@@ -25,5 +25,5 @@ interface WaterIntakeDao {
     """)
 
     //TODO: List maybe exchanged with "Map<Long, Int>"
-    suspend fun getWaterIntakeForDateRange(startDate: Long, endDate: Long): List<DailyWaterIntake>
+    suspend fun getWaterIntakeForDateRange(startDate: String, endDate: String): List<DailyWaterIntake>
 }

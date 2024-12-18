@@ -39,13 +39,13 @@ fun GaugeBarComponent(
     backgroundIndicatorStrokeWidth: Float = 100f,
     foregroundIndicatorColor: Brush,
     foregroundIndicatorStrokeWidth: Float = 100f,
-//    indicatorStrokeCap: StrokeCap = StrokeCap.Round,
+    //indicatorStrokeCap: StrokeCap = StrokeCap.Round,
     bigTextFontSize: TextUnit = MaterialTheme.typography.headlineLarge.fontSize,
     bigTextColor: Color = MaterialTheme.colorScheme.onSurface,
     //bigTextSuffix: String = "GB",
     //smallText: String = "Remaining",
-    smallTextFontSize: TextUnit = MaterialTheme.typography.headlineSmall.fontSize,
-    smallTextColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+    //smallTextFontSize: TextUnit = MaterialTheme.typography.headlineSmall.fontSize,
+    //smallTextColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
 ) {
     var allowedIndicatorValue by remember {
         mutableStateOf(maxIndicatorValue)

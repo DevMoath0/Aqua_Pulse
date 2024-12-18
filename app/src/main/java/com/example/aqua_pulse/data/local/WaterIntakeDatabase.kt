@@ -7,7 +7,7 @@ import com.example.aqua_pulse.data.local.entity.WaterIntakeEntity
 
 @Database(
     entities = [WaterIntakeEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class WaterIntakeDatabase: RoomDatabase(){
