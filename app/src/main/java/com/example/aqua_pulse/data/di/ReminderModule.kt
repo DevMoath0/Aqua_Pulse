@@ -1,4 +1,4 @@
-package com.example.aqua_pulse.di
+package com.example.aqua_pulse.data.di
 
 import ReminderRepositoryImpl
 import android.content.Context

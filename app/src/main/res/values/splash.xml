@@ -8,6 +8,10 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
 
+        <!-- Light Status Bar -->
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">false</item> <!-- Icons for dark background -->
+
         <!-- Todo:
         BTW there is an issue after the splash screen there is a white screen appearing
         then the HomeScreen, solve it, this is a temp solution
