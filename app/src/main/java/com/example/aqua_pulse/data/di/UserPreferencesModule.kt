@@ -1,4 +1,4 @@
-package com.example.aqua_pulse.di
+package com.example.aqua_pulse.data.di
 
 import android.content.Context
 import com.example.aqua_pulse.data.local.preferences.UserPreferencesManager
