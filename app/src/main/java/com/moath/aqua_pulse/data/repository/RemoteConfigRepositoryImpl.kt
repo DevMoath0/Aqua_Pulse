@@ -34,15 +34,21 @@ class RemoteConfigRepositoryImpl @Inject constructor() : RemoteConfigRepository 
     }
 
     override suspend fun fetchAndActivate() {
-        remoteConfig.fetch(0).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val fetchedBuildNumber = remoteConfig.getDouble("build_number")
-                remoteConfig.activate().addOnCompleteListener {
-                    Log.d("RemoteConfig", "Cleared cache and activated values, build number $fetchedBuildNumber")
-                }
+        try {
+            // Wait for fetch to complete
+            remoteConfig.fetch(0).await()
+
+            // Wait for activation to complete
+            val isActivateSuccessful = remoteConfig.activate().await()
+            if (isActivateSuccessful) {
+                val fetchedBuildNumber = remoteConfig.getDouble(BUILD_NUMBER)
+                Log.d("RemoteConfig", "Activated values successfully. Fetched build number: $fetchedBuildNumber")
             } else {
-                Log.e("RemoteConfig", "Fetch failed: ${task.exception?.message}")
+                Log.e("RemoteConfig", "Activation failed.")
             }
+        } catch (e: Exception) {
+            Log.e("RemoteConfig", "Error during fetch and activate: ${e.message}")
+            Firebase.crashlytics.recordException(e)
         }
     }
 
