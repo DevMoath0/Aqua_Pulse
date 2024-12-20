@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "599141773134",
+    "project_id": "water-drop-242",
+    "storage_bucket": "water-drop-242.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599141773134:android:085515f2f71566bc5b781f",
+        "android_client_info": {
+          "package_name": "com.moath.aqua_pulse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ_F9zKxt-PGHDmiPhASi-2vSH7gEVpxU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

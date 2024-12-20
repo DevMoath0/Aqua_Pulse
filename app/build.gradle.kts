@@ -4,14 +4,15 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.example.aqua_pulse"
+    namespace = "com.moath.aqua_pulse"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.aqua_pulse"
+        applicationId = "com.moath.aqua_pulse"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -108,6 +109,16 @@ dependencies {
     // WorkManager
     implementation("androidx.work:work-runtime-ktx:2.8.1")
     implementation("androidx.work:work-runtime:2.8.1")
+
+    // Firebase BOM
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+
+    // Firebase Remote config
+    implementation("com.google.firebase:firebase-config")
+
+    // Firebase Crashlytics
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics")
 
 }
 
