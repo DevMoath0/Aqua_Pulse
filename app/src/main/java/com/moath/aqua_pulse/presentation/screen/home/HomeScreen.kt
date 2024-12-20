@@ -30,8 +30,8 @@ import com.moath.aqua_pulse.R
 import com.moath.aqua_pulse.core.theme.background
 import com.moath.aqua_pulse.core.utils.DateUtils
 import com.moath.aqua_pulse.presentation.screen.Screen
-import com.moath.aqua_pulse.presentation.screen.home.composables.BlobsComp
-import com.moath.aqua_pulse.presentation.screen.home.composables.WaterDropComp
+import com.moath.aqua_pulse.presentation.screen.home.components.BlobsComp
+import com.moath.aqua_pulse.presentation.screen.home.components.WaterDropComp
 
 @Composable
 fun HomeScreen(

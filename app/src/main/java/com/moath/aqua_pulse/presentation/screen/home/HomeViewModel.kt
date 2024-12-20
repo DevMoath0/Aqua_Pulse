@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
     //private val _defaultAmount = MutableStateFlow(250)
     //val defaultAmount: StateFlow<Int> = _defaultAmount.asStateFlow()
 
-    private val _buildNumber = MutableStateFlow(0.1)
+    private val _buildNumber = MutableStateFlow(1.0)
     val buildNumber: StateFlow<Double> = _buildNumber.asStateFlow()
 
     init {

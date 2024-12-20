@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Aqua_Pulse</string>
     <string name="com.crashlytics.android.build_id">none</string>
+
+    // Welcome Screen
+    <string name="welcome_title">Welcome to Water Drop App!</string>
+    <string name="welcome_subtitle">The application will remind you to drink water every day
+        and keep track of your drink history</string>
+    <string name="welcome_describtion1">Lets start and calculate how much water intake you need</string>
+    <string name="btn_start">Start</string>
+
 </resources>

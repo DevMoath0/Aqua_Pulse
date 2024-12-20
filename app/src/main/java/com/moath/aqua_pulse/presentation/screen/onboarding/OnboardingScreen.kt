@@ -9,29 +9,42 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.moath.aqua_pulse.presentation.screen.Screen
+import com.moath.aqua_pulse.presentation.screen.onboarding.components.Stepper
 
 @Composable
 fun OnboardingScreen(
     navController: NavController,
     viewModel: OnboardingViewModel = hiltViewModel()
 ) {
-    // TODO: Implement multi-step onboarding UI
-    Column (
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+    val currentStep by viewModel.currentStep
+    val totalSteps = viewModel.totalSteps
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ){
-        // Onboarding steps (hydration goals, notifications setup, etc.)
-        Button(
-            onClick = {
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        // Stepper Component
+        Stepper(currentStep = currentStep, totalSteps = totalSteps)
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Step-Specific Content
+        when (currentStep) {
+            1 -> WelcomeScreen(onNext = { viewModel.nextStep() })
+            2 -> GenderScreen(onNext = { viewModel.updateGender(it) })
+            3 -> BirthDateScreen(onNext = { viewModel.updateBirthDate(it) })
+            4 -> WeightScreen(onNext = { viewModel.updateWeight(it) })
+            5 -> DailyGoalScreen(onComplete = {
+                viewModel.updateDailyGoal(it)
                 viewModel.completeOnboarding {
                     navController.navigate(Screen.HomeScreen.route) {
                         popUpTo(Screen.OnboardingScreen.route) { inclusive = true }
                     }
                 }
-            }
-        ) {
-            Text("Complete Onboarding")
+            })
         }
     }
 }

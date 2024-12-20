@@ -26,7 +26,7 @@ class RemoteConfigRepositoryImpl @Inject constructor() : RemoteConfigRepository 
 
         remoteConfig.setDefaultsAsync(
             mapOf(
-                BUILD_NUMBER to 0.1
+                BUILD_NUMBER to 1.0
             )
         )
 

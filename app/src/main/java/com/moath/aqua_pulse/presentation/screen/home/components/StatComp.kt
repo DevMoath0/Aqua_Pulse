@@ -1,4 +1,4 @@
-package com.moath.aqua_pulse.presentation.screen.home.composables
+package com.moath.aqua_pulse.presentation.screen.home.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Column
