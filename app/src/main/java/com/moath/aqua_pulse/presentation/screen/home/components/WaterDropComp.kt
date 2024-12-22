@@ -19,7 +19,7 @@ import com.moath.aqua_pulse.core.theme.gauge_background
 fun WaterDropComp(
     modifier: Modifier,
     indicatorValue: Int,
-    maxIndicatorValue: Int,
+    maxIndicatorValue: Float,
 ){
 
     val verticalOffset: Dp = (100).dp
@@ -41,7 +41,7 @@ fun WaterDropComp(
         ){
             GaugeBarComponent(
                 indicatorValue = indicatorValue,
-                maxIndicatorValue = maxIndicatorValue,
+                maxIndicatorValue = maxIndicatorValue.toInt(),
                 foregroundIndicatorColor = gaugeBarGradientBrush,
                 backgroundIndicatorColor = gauge_background,
             )

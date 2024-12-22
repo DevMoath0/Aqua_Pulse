@@ -1,6 +1,6 @@
 package com.moath.aqua_pulse.data.di
 
-import ReminderRepositoryImpl
+import com.moath.aqua_pulse.data.repository.ReminderRepositoryImpl
 import android.content.Context
 import com.moath.aqua_pulse.data.local.preferences.UserPreferencesManager
 import com.moath.aqua_pulse.domain.repository.ReminderRepository

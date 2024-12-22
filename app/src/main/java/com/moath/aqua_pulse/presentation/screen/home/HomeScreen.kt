@@ -44,9 +44,7 @@ fun HomeScreen(
 
     val todayWaterAmount = dailyData.find { it.date == DateUtils.getCurrentDateOnly() }?.totalAmount ?: 0
 
-    //Todo: Make it based on the user.
-    ///Daily Goal in ml
-    val dailyGoal = 2000 // Default goal in ml
+    val dailyGoal by viewModel.dailyGoal.collectAsState(initial = 2000f)
 
     Box(
         modifier = Modifier
@@ -74,7 +72,7 @@ fun HomeScreen(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null  // This removes the ripple effect
                     ){
-                        if(todayWaterAmount in 0..< dailyGoal){
+                        if(todayWaterAmount in 0..<dailyGoal.toInt()){
                             viewModel.addWaterIntake(250)
                         }
                     }
@@ -91,9 +89,7 @@ fun HomeScreen(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null  // This removes the ripple effect
                     ){
-                        if(todayWaterAmount in 0..< dailyGoal){
-                            viewModel.addWaterIntake(250)
-                        }
+                        viewModel.addWaterIntake(250)
                     },
 
             )
@@ -109,7 +105,7 @@ fun HomeScreen(
             )
 
             Text(
-                text = "of ${dailyGoal}ml daily goal",
+                text = "of ${dailyGoal.toInt()}ml daily goal",
                 style = MaterialTheme.typography.titleMedium,
                 color = Color.White
             )

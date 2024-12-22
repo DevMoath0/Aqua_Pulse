@@ -9,4 +9,7 @@
     <string name="welcome_describtion1">Lets start and calculate how much water intake you need</string>
     <string name="btn_start">Start</string>
 
+    //Gender Screen
+    <string name="gender_question">What is your gender?</string>
+
 </resources>

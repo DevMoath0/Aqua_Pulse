@@ -8,8 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.moath.aqua_pulse.presentation.screen.home.HomeScreen
 import com.moath.aqua_pulse.presentation.screen.home.HomeViewModel
-import com.moath.aqua_pulse.presentation.screen.onboarding.OnboardingScreen
-import com.moath.aqua_pulse.presentation.screen.onboarding.OnboardingViewModel
+import com.moath.aqua_pulse.presentation.screen.onboarding.onboardingScreen.OnboardingScreen
+import com.moath.aqua_pulse.presentation.screen.onboarding.onboardingScreen.OnboardingViewModel
 import com.moath.aqua_pulse.presentation.screen.notifications.ReminderPreferencesScreen
 import com.moath.aqua_pulse.presentation.screen.notifications.ReminderPreferencesViewModel
 import com.moath.aqua_pulse.presentation.screen.splash.SplashScreen

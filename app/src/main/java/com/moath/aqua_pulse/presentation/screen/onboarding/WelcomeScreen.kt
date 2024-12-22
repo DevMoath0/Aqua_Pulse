@@ -66,7 +66,7 @@ fun WelcomeScreen(onNext: (String) -> Unit) {
 
                 Text(
                     text = stringResource(id = R.string.welcome_subtitle),
-                    style = MaterialTheme.typography.labelSmall,
+                    style = MaterialTheme.typography.titleSmall,
                     textAlign = TextAlign.Center,
                     color = water_drop_color5
                 )
@@ -96,7 +96,7 @@ fun WelcomeScreen(onNext: (String) -> Unit) {
 
                 Text(
                     text = stringResource(id = R.string.welcome_describtion1),
-                    style = MaterialTheme.typography.labelSmall,
+                    style = MaterialTheme.typography.titleSmall,
                     color = water_drop_color5
                 )
 
@@ -119,5 +119,5 @@ fun WelcomeScreen(onNext: (String) -> Unit) {
 
     }
 
-    }
+}
 

@@ -1,6 +1,6 @@
 package com.moath.aqua_pulse.core.utils
 
-import ReminderRepositoryImpl
+import com.moath.aqua_pulse.data.repository.ReminderRepositoryImpl
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
