@@ -42,3 +42,11 @@ val gaugeBarGradientBrush = Brush.horizontalGradient(
         water_drop_color1
     )
 )
+
+val buttonBarGradientBrush = Brush.linearGradient(
+    colors = listOf(
+        water_drop_color1,
+        water_drop_color2,
+        water_drop_color3
+    )
+)

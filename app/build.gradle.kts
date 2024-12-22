@@ -120,6 +120,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics")
 
+    implementation("io.github.ltttttttttttt:ComposeViews:1.6.11.2")
+
 }
 
 // Allow references to generated code

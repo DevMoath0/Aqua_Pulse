@@ -1,4 +1,4 @@
-package com.moath.aqua_pulse.presentation.screen.home.composables
+package com.moath.aqua_pulse.presentation.screen.home.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -48,7 +48,7 @@ fun GaugeBarComponent(
     //smallTextColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
 ) {
     var allowedIndicatorValue by remember {
-        mutableStateOf(maxIndicatorValue)
+        mutableIntStateOf(maxIndicatorValue)
     }
     allowedIndicatorValue = if (indicatorValue <= maxIndicatorValue) {
         indicatorValue
@@ -56,7 +56,7 @@ fun GaugeBarComponent(
         maxIndicatorValue
     }
 
-    var animatedIndicatorValue by remember { mutableStateOf(0f) }
+    var animatedIndicatorValue by remember { mutableFloatStateOf(0f) }
     LaunchedEffect(key1 = allowedIndicatorValue) {
         animatedIndicatorValue = allowedIndicatorValue.toFloat()
     }
